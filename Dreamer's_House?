@@ -3,391 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Второй этап</title>
+    <title>Этап 2</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Determination Mono', 'Press Start 2P', 'Courier New', monospace;
-            transition: background 0.8s ease;
-            padding: 20px;
-        }
-        body.dark {
-            background: #111111;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            transition: all 0.5s ease;
-        }
-        .input-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .input-area input {
-            font-family: 'Determination Mono', 'Press Start 2P', monospace;
-            font-size: 32px;
-            padding: 15px 25px;
-            border: 3px solid #000000;
-            background: #ffffff;
-            color: #000000;
-            text-align: center;
-            width: 300px;
-            max-width: 90%;
-            outline: none;
-            transition: 0.3s;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-        .input-area input:focus {
-            border-color: #666666;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        .input-area .hint {
-            font-size: 14px;
-            color: #666666;
-            opacity: 0.6;
-            letter-spacing: 2px;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .choice-area {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .choice-area p {
-            color: #ffffff;
-            font-size: 24px;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-        .choice-buttons {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .choice-buttons button {
-            font-family: 'Determination Mono', 'Press Start 2P', monospace;
-            font-size: 20px;
-            padding: 18px 40px;
-            border: 2px solid #ffffff;
-            background: transparent;
-            color: #ffffff;
-            cursor: pointer;
-            transition: 0.3s;
-            letter-spacing: 2px;
-        }
-        .choice-buttons button:hover {
-            background: #ffffff;
-            color: #000000;
-        }
-        .bsod {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0000aa;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            z-index: 999;
-            font-family: 'Determination Mono', 'Courier New', monospace;
-            color: #ffffff;
-            animation: bsodFlicker 0.5s ease;
-        }
-        .bsod.active {
-            display: flex;
-        }
-        @keyframes bsodFlicker {
-            0% { opacity: 0; transform: scale(0.95); }
-            20% { opacity: 1; transform: scale(1.02); }
-            40% { opacity: 0.8; }
-            60% { opacity: 1; }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .bsod-content {
-            max-width: 800px;
-            width: 100%;
-            text-align: left;
-            font-size: 18px;
-            line-height: 1.8;
-            background: rgba(0,0,170,0.9);
-            padding: 30px;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 50px rgba(0,0,255,0.5);
-        }
-        .bsod-content .title {
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        .bsod-content .error-code {
-            font-size: 14px;
-            color: #aaccff;
-            margin: 10px 0;
-        }
-        .bsod-content .progress {
-            background: #ffffff;
-            height: 4px;
-            width: 100%;
-            margin: 15px 0;
-            animation: bsodProgress 55s linear forwards;
-        }
-        @keyframes bsodProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        .bsod-content .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #88aaff;
-            text-align: center;
-        }
-        .linux-penguin {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            font-family: 'Determination Mono', 'Courier New', monospace;
-            color: #00ff00;
-            padding: 20px;
-        }
-        .linux-penguin.active {
-            display: flex;
-        }
-        .linux-penguin pre {
-            font-size: 14px;
-            line-height: 1.2;
-            color: #00ff00;
-            text-shadow: 0 0 10px rgba(0,255,0,0.3);
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-width: 100%;
-            background: #000000;
-            padding: 20px;
-            border: 1px solid #00ff00;
-        }
-        .linux-penguin .boot-text {
-            font-size: 18px;
-            margin-top: 20px;
-            letter-spacing: 2px;
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        .final-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            font-family: 'Determination Mono', 'Courier New', monospace;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .final-message.active {
-            display: flex;
-        }
-        .final-message h1 {
-            font-size: 36px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 30px rgba(255,255,255,0.5);
-        }
-        .final-message p {
-            font-size: 20px;
-            max-width: 600px;
-            line-height: 1.6;
-            opacity: 0.8;
-        }
-        @media (max-width: 700px) {
-            .input-area input { font-size: 24px; width: 90%; }
-            .choice-buttons button { font-size: 16px; padding: 14px 28px; }
-            .bsod-content { font-size: 14px; padding: 20px; }
-            .bsod-content .title { font-size: 20px; }
-            .linux-penguin pre { font-size: 10px; }
-            .final-message h1 { font-size: 26px; }
-            .final-message p { font-size: 16px; }
-        }
-        @media (max-width: 480px) {
-            .input-area input { font-size: 18px; padding: 10px 15px; }
-            .choice-buttons button { font-size: 14px; padding: 10px 20px; }
-            .bsod-content { font-size: 12px; padding: 15px; }
-            .bsod-content .title { font-size: 16px; }
-            .linux-penguin pre { font-size: 8px; }
-            .final-message h1 { font-size: 20px; }
-            .final-message p { font-size: 14px; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}body{background:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:background 1.5s;padding:20px}body.dark{background:#0a0a0a}.container{max-width:800px;width:100%;text-align:center;transition:.5s}body.dark .container{color:#fff}.input-area{display:flex;flex-direction:column;align-items:center;gap:15px}.input-area input{font-family:'Courier New',monospace;font-size:48px;font-weight:bold;padding:20px 30px;border:3px solid #000;background:#fff;color:#000;text-align:center;width:400px;max-width:90%;outline:0;letter-spacing:8px;text-transform:uppercase;transition:.3s}body.dark .input-area input{background:#0a0a0a;color:#fff;border-color:#fff}.input-area .hint{font-size:16px;color:#000;opacity:.5;letter-spacing:3px}body.dark .input-area .hint{color:#fff;opacity:.3}.hidden{display:none!important}.choice-area{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:30px}.choice-area p{color:#fff;font-size:28px;letter-spacing:4px;text-shadow:0 0 20px rgba(255,255,255,.3)}.choice-buttons{display:flex;gap:60px;flex-wrap:wrap;justify-content:center}.choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}.choice-buttons button:hover{background:#fff;color:#000}
+        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:flicker .6s ease}.bsod.active{display:flex}@keyframes flicker{0%{opacity:0}15%{opacity:1;transform:scale(1.01)}30%{opacity:.8}45%{opacity:1}100%{opacity:1}}
+        .bsod-content{max-width:850px;width:100%;text-align:left;font-size:18px;line-height:2;background:#0000aa;padding:30px 40px;border:1px solid #fff;box-shadow:inset 0 0 30px rgba(0,0,255,.3)}
+        .bsod-content .title{font-size:32px;font-weight:bold;text-align:center;margin-bottom:25px;letter-spacing:2px;text-transform:uppercase;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
+        .bsod-content .err{font-size:15px;color:#aaccff;margin:8px 0}.bsod-content .err span{background:#fff;color:#0000aa;padding:0 6px}
+        .bsod-content .bar{background:#fff;height:6px;width:100%;margin:20px 0;animation:progress 55s linear forwards}@keyframes progress{0%{width:0}100%{width:100%}}
+        .bsod-content .footer{margin-top:30px;font-size:14px;color:#88aaff;text-align:center;border-top:1px solid #4466aa;padding-top:20px}
+        .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;animation:flicker .3s ease}.linux.active{display:flex}
+        .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:1px solid #0f0;box-shadow:0 0 40px rgba(0,255,0,.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto}
+        .linux .term .l{margin:2px 0;opacity:.9}.linux .term .l .h{color:#0ff}.linux .term .l .e{color:#f44}
+        .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
+        @media(max-width:700px){.input-area input{font-size:32px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{font-size:14px;padding:20px}.bsod-content .title{font-size:24px}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
+        @media(max-width:480px){.input-area input{font-size:24px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{font-size:12px;padding:15px}.bsod-content .title{font-size:18px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
     </style>
 </head>
 <body>
-    <div class="container" id="mainContainer">
-        <div class="input-area" id="inputArea">
-            <input type="text" id="bugInput" placeholder="ВВЕДИТЕ КОД" maxlength="10" autofocus>
-            <div class="hint">Введите BUG для продолжения</div>
-        </div>
-        <div class="choice-area hidden" id="choiceArea">
-            <p>С какого вы устройства?</p>
-            <div class="choice-buttons">
-                <button id="pcChoice">💻 Компьютер</button>
-                <button id="phoneChoice">📱 Телефон</button>
-            </div>
-        </div>
+<div class="container" id="mainContainer">
+    <div class="input-area" id="inputArea">
+        <input type="text" id="bugInput" placeholder="BUG" maxlength="10" autofocus>
+        <div class="hint">Введите код</div>
     </div>
-
-    <div class="bsod" id="bsod">
-        <div class="bsod-content">
-            <div class="title">💀 СИНИЙ ЭКРАН СМЕРТИ</div>
-            <div class="error-code">STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
-            <div class="error-code">SYSTEM_SERVICE_EXCEPTION</div>
-            <div style="margin: 15px 0; font-size: 16px;">Windows загружает критически важные драйверы...</div>
-            <div class="progress"></div>
-            <div style="font-size: 15px; color: #88aaff;">Идёт сброс дампа памяти: <span id="dumpProgress">0</span>%</div>
-            <div class="footer">Перезагрузите компьютер. Если проблема повторяется, обратитесь к администратору.</div>
+    <div class="choice-area hidden" id="choiceArea">
+        <p>С какого вы устройства?</p>
+        <div class="choice-buttons">
+            <button id="pcChoice">Компьютер</button>
+            <button id="phoneChoice">Телефон</button>
         </div>
     </div>
+</div>
 
-    <div class="linux-penguin" id="linuxPenguin">
-        <pre>
-            .--.
-           |o_o |
-           |:_/ |
-          //   \ \
-         (|     | )
-        /'\_   _/`\
-        \___)=(___/
-        </pre>
-        <div class="boot-text">Загрузка Linux kernel... 5.15.0-86-generic</div>
-        <div style="font-size: 14px; color: #00ff00; margin-top: 10px; opacity: 0.7;">Инициализация ядра... OK</div>
-        <div style="font-size: 14px; color: #00ff00; margin-top: 5px; opacity: 0.7;">Монтирование корневой ФС... OK</div>
-        <div style="font-size: 14px; color: #00ff00; margin-top: 5px; opacity: 0.7;">Запуск systemd... OK</div>
-        <div style="font-size: 14px; color: #00ff00; margin-top: 5px; opacity: 0.7; animation: blink 1s step-end infinite;">Готово. Вход в систему...</div>
+<div class="bsod" id="bsod">
+    <div class="bsod-content">
+        <div class="title">СИНИЙ ЭКРАН СМЕРТИ</div>
+        <div class="err">STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
+        <div class="err">SYSTEM_SERVICE_EXCEPTION</div>
+        <div class="err">Адрес: <span>0xFFFFF800`02A4B3C2</span></div>
+        <div style="margin:15px 0;color:#88aaff;">Загрузка драйверов...</div>
+        <div class="bar"></div>
+        <div style="text-align:right;font-size:14px;color:#88aaff;margin-top:-10px;">Сброс дампа: <span id="dumpProgress">0</span>%</div>
+        <div style="margin-top:10px;font-size:15px;color:#88aaff;">Ошибка: IRQL_NOT_LESS_OR_EQUAL | Драйвер: ntoskrnl.exe</div>
+        <div class="footer">Перезагрузите компьютер. Код ошибки: 0x0000007B</div>
     </div>
+</div>
 
-    <div class="final-message" id="finalMessage">
-        <h1>✅ Пройден 2 этап</h1>
-        <p>Есть какие нибудь вопросы?</p>
-    </div>
+<div class="linux" id="linuxTerminal">
+    <div class="term" id="terminalContent"></div>
+</div>
 
-    <script>
-        const bugInput = document.getElementById('bugInput');
-        const inputArea = document.getElementById('inputArea');
-        const choiceArea = document.getElementById('choiceArea');
-        const mainContainer = document.getElementById('mainContainer');
-        const bsod = document.getElementById('bsod');
-        const linuxPenguin = document.getElementById('linuxPenguin');
-        const finalMessage = document.getElementById('finalMessage');
-        const dumpProgress = document.getElementById('dumpProgress');
+<div class="final" id="finalMessage">
+    <h1>ПРОЙДЕН 2 ЭТАП</h1>
+    <p>Есть какие нибудь вопросы?</p>
+</div>
 
-        let timer = null;
-        let isCompleted = false;
+<script>
+    const bugInput = document.getElementById('bugInput');
+    const inputArea = document.getElementById('inputArea');
+    const choiceArea = document.getElementById('choiceArea');
+    const mainContainer = document.getElementById('mainContainer');
+    const bsod = document.getElementById('bsod');
+    const linuxTerminal = document.getElementById('linuxTerminal');
+    const finalMessage = document.getElementById('finalMessage');
+    const dumpProgress = document.getElementById('dumpProgress');
 
-        function checkBug() {
-            const val = bugInput.value.trim().toLowerCase();
-            if (val === 'bug' && !isCompleted) {
-                isCompleted = true;
-                document.body.classList.add('dark');
-                inputArea.classList.add('hidden');
-                choiceArea.classList.remove('hidden');
-                bugInput.blur();
-            }
+    let isCompleted = false;
+
+    function checkBug() {
+        const val = bugInput.value.trim().toLowerCase();
+        if (val === 'bug' && !isCompleted) {
+            isCompleted = true;
+            document.body.classList.add('dark');
+            inputArea.classList.add('hidden');
+            choiceArea.classList.remove('hidden');
+            bugInput.blur();
         }
+    }
 
-        bugInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkBug();
-        });
+    bugInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkBug(); });
+    bugInput.addEventListener('input', checkBug);
 
-        bugInput.addEventListener('input', function() {
-            if (this.value.length > 0) checkBug();
-        });
+    function startTimer() {
+        let seconds = 0, maxSec = 55;
+        const interval = setInterval(() => {
+            seconds++;
+            const pct = Math.min(Math.round((seconds / maxSec) * 100), 100);
+            if (dumpProgress) dumpProgress.textContent = pct;
+            if (seconds >= maxSec) {
+                clearInterval(interval);
+                finalMessage.classList.add('active');
+                bsod.classList.remove('active');
+                linuxTerminal.classList.remove('active');
+            }
+        }, 1000);
+    }
 
-        function startTimer() {
-            let seconds = 0;
-            const maxSeconds = 55;
-            if (dumpProgress) {
-                dumpProgress.textContent = '0';
-                const interval = setInterval(() => {
-                    seconds++;
-                    const progress = Math.min(Math.round((seconds / maxSeconds) * 100), 100);
-                    if (dumpProgress) dumpProgress.textContent = progress;
-                    if (seconds >= maxSeconds) {
-                        clearInterval(interval);
-                        if (!finalMessage.classList.contains('active')) {
-                            finalMessage.classList.add('active');
-                            bsod.classList.remove('active');
-                            linuxPenguin.classList.remove('active');
-                        }
-                    }
-                }, 1000);
+    function generateLinuxLogs() {
+        const lines = [];
+        const msgs = [
+            '[    0.000000] Linux version 5.15.0-86-generic (root@builder) #96-Ubuntu SMP',
+            '[    0.001234] BIOS-provided physical RAM map: [mem 0x0000000000000000-0x000000000009FFFF] usable',
+            '[    0.002345] smpboot: CPU0: Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz',
+            '[    0.003456] smpboot: Booting 1 CPU, 2 CPUs, 3 CPUs, 4 CPUs, 5 CPUs, 6 CPUs',
+            '[    0.004567] PCI: Using configuration type 1 for base access',
+            '[    0.005678] mtrr: your CPUs had inconsistent fixed MTRR settings',
+            '[    0.006789] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-86-generic',
+            '[    0.007890] Initializing cgroup subsys cpuset, cpu, cpuacct',
+            '[    0.009012] CPU: Physical Processor ID: 0, Processor Core ID: 0',
+            '[    0.010123] memory: 0x0000000000000000 - 0x000000007FFFFFFF (usable)',
+            '[    0.011234] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1',
+            '[    0.012345] ftrace: allocating 45678 entries in 178 pages',
+            '[    0.013456] rcu: Hierarchical RCU implementation. Restricting CPUs from NR_CPUS=512 to nr_cpu_ids=8',
+            '[    0.014567] NR_IRQS: 1664, nr_irqs: 1024, preallocated irqs: 16',
+            '[    0.015678] Console: colour dummy device 80x25',
+            '[    0.016789] printk: console [tty0] enabled',
+            '[    0.017890] ACPI: Core revision 20210730',
+            '[    0.019012] clocksource: hpet: mask: 0xFFFFFFFF max_cycles: 0xFFFFFFFF',
+            '[    0.020123] APIC: Switch to symmetric I/O mode setup',
+            '[    0.021234] DMAR: Host address width 39, DRHD base: 0x00000000FE000000',
+            '[    0.022345] PCI: Using host bridge windows from ACPI',
+            '[    0.023456] ACPI: Enabled 8 GPEs in block 00 to 3F',
+            '[    0.024567] cryptd: max_cpu_qlen set to 1000',
+            '[    0.025678] AVX2 version of gcm_enc/dec engaged',
+            '[    0.026789] AES CTR mode by8 optimization enabled',
+            '[    0.027890] Block layer SCSI generic (bsg) driver version 0.4 loaded',
+            '[    0.029012] io scheduler mq-deadline, kyber, bfq registered',
+            '[    0.030123] pcieport 0000:00:1c.0: PME, AER, DPC enabled with IRQ 120',
+            '[    0.031234] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled',
+            '[    0.032345] Linux agpgart interface v0.103',
+            '[    0.033456] AMD IOMMUv2 driver by Joerg Roedel <jroedel@suse.de>',
+            '[    0.034567] i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:PS2M] at 0x60,0x64 irq 1,12',
+            '[    0.035678] serio: i8042 KBD port at 0x60,0x64 irq 1, AUX port at 0x60,0x64 irq 12',
+            '[    0.036789] mousedev: PS/2 mouse device common for all mice',
+            '[    0.037890] rtc_cmos 00:02: RTC can wake from S4, registered as rtc0',
+            '[    0.039012] device-mapper: uevent: version 1.0.3, ioctl: 4.45.0 initialised',
+            '[    0.040123] platform eisa.0: Probing EISA bus 0, Cannot allocate resource for mainboard',
+            '[    0.041234] intel_pstate: Intel P-state driver initializing, HWP enabled',
+            '[    0.042345] ledtrig-cpu: registered to indicate activity on CPUs',
+            '[    0.043456] EFI Variables Facility v0.08 2004-May-17',
+            '[    0.044567] NET: Registered PF_INET protocol family',
+            '[    0.045678] IP idents hash table entries: 262144 (order: 9, 2097152 bytes)',
+            '[    0.046789] TCP established hash table entries: 131072 (order: 8, 1048576 bytes)',
+            '[    0.047890] UDP hash table entries: 16384 (order: 6, 262144 bytes)',
+            '[    0.049012] NET: Registered PF_UNIX/PF_LOCAL protocol family',
+            '[    0.050123] RPC: Registered named UNIX socket, udp, tcp transport modules',
+            '[    0.051234] PCI: CLS 64 bytes, default 64',
+            '[    0.052345] Trying to unpack rootfs image as initramfs... Freeing initrd memory: 123456K',
+            '[    0.053456] Initialise system trusted keyrings, Key type blacklist registered',
+            '[    0.054567] workingset: timestamp_bits=36 max_order=22 bucket_order=0',
+            '[    0.055678] zbud: loaded, squashfs: version 4.0, fuse: init (API version 7.34)',
+            '[    0.056789] integrity: Platform Keyring initialized, Key type asymmetric registered',
+            '[    0.057890] Asymmetric key parser x509 registered',
+            '[    0.059012] io scheduler mq-deadline, kyber, bfq registered',
+            '[    0.060123] pcieport 0000:00:1c.0: PME, AER, DPC, DP enabled with IRQ 120',
+            '[    0.061234] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled',
+            '[    0.062345] Linux agpgart interface v0.103',
+            '[    0.063456] i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:PS2M] at 0x60,0x64 irq 1,12',
+            '[    0.064567] serio: i8042 KBD port at 0x60,0x64 irq 1, AUX port at 0x60,0x64 irq 12',
+            '[    0.065678] mousedev: PS/2 mouse device common for all mice',
+            '[    0.066789] rtc_cmos 00:02: RTC can wake from S4, registered as rtc0',
+            '[    0.067890] device-mapper: uevent: version 1.0.3, ioctl: 4.45.0 initialised',
+            '[    0.069012] platform eisa.0: Probing EISA bus 0, Cannot allocate resource for mainboard',
+            '[    0.070123] intel_pstate: Intel P-state driver initializing, HWP enabled',
+            '[    0.071234] ledtrig-cpu: registered to indicate activity on CPUs'
+        ];
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < msgs.length) {
+                const div = document.createElement('div');
+                div.className = 'l';
+                div.textContent = msgs[i];
+                document.getElementById('terminalContent').appendChild(div);
+                document.getElementById('terminalContent').scrollTop = document.getElementById('terminalContent').scrollHeight;
+                i++;
             } else {
-                setTimeout(() => {
-                    if (!finalMessage.classList.contains('active')) {
-                        finalMessage.classList.add('active');
-                        bsod.classList.remove('active');
-                        linuxPenguin.classList.remove('active');
-                    }
-                }, maxSeconds * 1000);
+                clearInterval(interval);
+                const last = document.createElement('div');
+                last.className = 'l';
+                last.style.animation = 'blink 1s step-end infinite';
+                last.textContent = 'root@system:~# _';
+                document.getElementById('terminalContent').appendChild(last);
             }
+        }, 80);
+    }
+
+    document.getElementById('pcChoice').addEventListener('click', () => {
+        if (isCompleted) {
+            bsod.classList.add('active');
+            choiceArea.classList.add('hidden');
+            startTimer();
         }
+    });
 
-        document.getElementById('pcChoice').addEventListener('click', function() {
-            if (isCompleted) {
-                bsod.classList.add('active');
-                choiceArea.classList.add('hidden');
-                startTimer();
-            }
-        });
+    document.getElementById('phoneChoice').addEventListener('click', () => {
+        if (isCompleted) {
+            linuxTerminal.classList.add('active');
+            choiceArea.classList.add('hidden');
+            generateLinuxLogs();
+            startTimer();
+        }
+    });
 
-        document.getElementById('phoneChoice').addEventListener('click', function() {
-            if (isCompleted) {
-                linuxPenguin.classList.add('active');
-                choiceArea.classList.add('hidden');
-                startTimer();
-            }
-        });
-
-        // Фокус на поле ввода
-        window.addEventListener('load', function() {
-            bugInput.focus();
-        });
-    </script>
+    window.addEventListener('load', () => bugInput.focus());
+</script>
 </body>
 </html>
