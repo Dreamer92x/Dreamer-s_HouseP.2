@@ -5,26 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Этап 2</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}body{background:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:background 1.5s;padding:20px}body.dark{background:#0a0a0a}.container{max-width:800px;width:100%;text-align:center;transition:.5s}body.dark .container{color:#fff}.input-area{display:flex;flex-direction:column;align-items:center;gap:15px}.input-area input{font-family:'Courier New',monospace;font-size:48px;font-weight:bold;padding:20px 30px;border:3px solid #000;background:#fff;color:#000;text-align:center;width:400px;max-width:90%;outline:0;letter-spacing:8px;text-transform:uppercase;transition:.3s}body.dark .input-area input{background:#0a0a0a;color:#fff;border-color:#fff}.input-area .hint{font-size:16px;color:#000;opacity:.5;letter-spacing:3px}body.dark .input-area .hint{color:#fff;opacity:.3}.hidden{display:none!important}.choice-area{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:30px}.choice-area p{color:#fff;font-size:28px;letter-spacing:4px;text-shadow:0 0 20px rgba(255,255,255,.3)}.choice-buttons{display:flex;gap:60px;flex-wrap:wrap;justify-content:center}.choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}.choice-buttons button:hover{background:#fff;color:#000}
-        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:flicker .6s ease}.bsod.active{display:flex}@keyframes flicker{0%{opacity:0}15%{opacity:1;transform:scale(1.01)}30%{opacity:.8}45%{opacity:1}100%{opacity:1}}
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#f5f5f5;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:background 1.5s;padding:20px}
+        body.dark{background:#0a0a0a}
+        .container{max-width:800px;width:100%;text-align:center;transition:.5s}
+        body.dark .container{color:#fff}
+        .input-area{display:flex;flex-direction:column;align-items:center;gap:20px}
+        .input-area .label{font-family:'Press Start 2P','Determination Mono',monospace;font-size:24px;color:#000;letter-spacing:2px;font-weight:300}
+        body.dark .input-area .label{color:#fff}
+        .input-area input{font-family:'Press Start 2P','Determination Mono',monospace;font-size:36px;font-weight:bold;padding:20px 30px;border:3px solid #000;background:#fff;color:#000;text-align:center;width:400px;max-width:90%;outline:0;letter-spacing:8px;text-transform:uppercase;transition:.3s}
+        body.dark .input-area input{background:#0a0a0a;color:#fff;border-color:#fff}
+        .hidden{display:none!important}
+        .choice-area{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:30px}
+        .choice-area p{color:#fff;font-size:28px;letter-spacing:4px;text-shadow:0 0 20px rgba(255,255,255,.3);font-family:'Courier New',monospace}
+        .choice-buttons{display:flex;gap:60px;flex-wrap:wrap;justify-content:center}
+        .choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}
+        .choice-buttons button:hover{background:#fff;color:#000}
+        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:flicker .6s ease}.bsod.active{display:flex}
+        @keyframes flicker{0%{opacity:0}15%{opacity:1;transform:scale(1.01)}30%{opacity:.8}45%{opacity:1}100%{opacity:1}}
         .bsod-content{max-width:850px;width:100%;text-align:left;font-size:18px;line-height:2;background:#0000aa;padding:30px 40px;border:1px solid #fff;box-shadow:inset 0 0 30px rgba(0,0,255,.3)}
         .bsod-content .title{font-size:32px;font-weight:bold;text-align:center;margin-bottom:25px;letter-spacing:2px;text-transform:uppercase;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
-        .bsod-content .err{font-size:15px;color:#aaccff;margin:8px 0}.bsod-content .err span{background:#fff;color:#0000aa;padding:0 6px}
-        .bsod-content .bar{background:#fff;height:6px;width:100%;margin:20px 0;animation:progress 55s linear forwards}@keyframes progress{0%{width:0}100%{width:100%}}
+        .bsod-content .err{font-size:15px;color:#aaccff;margin:8px 0}
+        .bsod-content .err span{background:#fff;color:#0000aa;padding:0 6px}
+        .bsod-content .bar{background:#fff;height:6px;width:100%;margin:20px 0;animation:progress 55s linear forwards}
+        @keyframes progress{0%{width:0}100%{width:100%}}
         .bsod-content .footer{margin-top:30px;font-size:14px;color:#88aaff;text-align:center;border-top:1px solid #4466aa;padding-top:20px}
         .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;animation:flicker .3s ease}.linux.active{display:flex}
         .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:1px solid #0f0;box-shadow:0 0 40px rgba(0,255,0,.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto}
-        .linux .term .l{margin:2px 0;opacity:.9}.linux .term .l .h{color:#0ff}.linux .term .l .e{color:#f44}
+        .linux .term .l{margin:2px 0;opacity:.9}
         .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
-        @media(max-width:700px){.input-area input{font-size:32px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{font-size:14px;padding:20px}.bsod-content .title{font-size:24px}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
-        @media(max-width:480px){.input-area input{font-size:24px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{font-size:12px;padding:15px}.bsod-content .title{font-size:18px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
+        @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{font-size:14px;padding:20px}.bsod-content .title{font-size:24px}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
+        @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{font-size:12px;padding:15px}.bsod-content .title{font-size:18px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
     </style>
 </head>
 <body>
 <div class="container" id="mainContainer">
     <div class="input-area" id="inputArea">
-        <input type="text" id="bugInput" placeholder="BUG" maxlength="10" autofocus>
-        <div class="hint">Введите код</div>
+        <div class="label">Введите Пароль</div>
+        <input type="text" id="bugInput" maxlength="10" autofocus>
     </div>
     <div class="choice-area hidden" id="choiceArea">
         <p>С какого вы устройства?</p>
@@ -100,8 +119,7 @@
     }
 
     function generateLinuxLogs() {
-        const lines = [];
-        const msgs = [
+        const lines = [
             '[    0.000000] Linux version 5.15.0-86-generic (root@builder) #96-Ubuntu SMP',
             '[    0.001234] BIOS-provided physical RAM map: [mem 0x0000000000000000-0x000000000009FFFF] usable',
             '[    0.002345] smpboot: CPU0: Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz',
@@ -154,26 +172,14 @@
             '[    0.054567] workingset: timestamp_bits=36 max_order=22 bucket_order=0',
             '[    0.055678] zbud: loaded, squashfs: version 4.0, fuse: init (API version 7.34)',
             '[    0.056789] integrity: Platform Keyring initialized, Key type asymmetric registered',
-            '[    0.057890] Asymmetric key parser x509 registered',
-            '[    0.059012] io scheduler mq-deadline, kyber, bfq registered',
-            '[    0.060123] pcieport 0000:00:1c.0: PME, AER, DPC, DP enabled with IRQ 120',
-            '[    0.061234] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled',
-            '[    0.062345] Linux agpgart interface v0.103',
-            '[    0.063456] i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:PS2M] at 0x60,0x64 irq 1,12',
-            '[    0.064567] serio: i8042 KBD port at 0x60,0x64 irq 1, AUX port at 0x60,0x64 irq 12',
-            '[    0.065678] mousedev: PS/2 mouse device common for all mice',
-            '[    0.066789] rtc_cmos 00:02: RTC can wake from S4, registered as rtc0',
-            '[    0.067890] device-mapper: uevent: version 1.0.3, ioctl: 4.45.0 initialised',
-            '[    0.069012] platform eisa.0: Probing EISA bus 0, Cannot allocate resource for mainboard',
-            '[    0.070123] intel_pstate: Intel P-state driver initializing, HWP enabled',
-            '[    0.071234] ledtrig-cpu: registered to indicate activity on CPUs'
+            '[    0.057890] Asymmetric key parser x509 registered'
         ];
         let i = 0;
         const interval = setInterval(() => {
-            if (i < msgs.length) {
+            if (i < lines.length) {
                 const div = document.createElement('div');
                 div.className = 'l';
-                div.textContent = msgs[i];
+                div.textContent = lines[i];
                 document.getElementById('terminalContent').appendChild(div);
                 document.getElementById('terminalContent').scrollTop = document.getElementById('terminalContent').scrollHeight;
                 i++;
