@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRITICAL ERROR</title>
+    <title>Dreamer's_House?</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
@@ -23,46 +23,45 @@
         .choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}
         .choice-buttons button:hover{background:#fff;color:#000}
 
-        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a8a;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:bsodFlash .3s ease 3;box-shadow:inset 0 0 100px rgba(0,0,50,0.8)}
+        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:999;font-family:'Courier New',monospace;color:#fff}
         .bsod.active{display:flex}
-        @keyframes bsodFlash{0%{opacity:1;background:#0a0a8a}50%{opacity:0.3;background:#0a0a5a}100%{opacity:1;background:#0a0a8a}}
-        .bsod-content{max-width:1000px;width:100%;text-align:left;background:#0a0a8a;padding:20px 30px;border:3px solid #88aaff;box-shadow:0 0 80px rgba(0,0,255,0.6),inset 0 0 60px rgba(0,0,100,0.5);position:relative;overflow:hidden}
-        .bsod-content::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 2px,transparent 2px,transparent 4px);pointer-events:none;animation:scan .15s linear infinite}
-        @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(4px)}}
-        .bsod-content::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 50%,rgba(0,0,255,0.1) 0%,transparent 70%);pointer-events:none;animation:distort 2s ease-in-out infinite}
-        @keyframes distort{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:0.6;transform:scale(1.02)}}
-        .bsod-content .crt{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,255,255,0.02) 0px,rgba(0,255,255,0.02) 1px,transparent 1px,transparent 3px);pointer-events:none;animation:crtFlicker 0.1s linear infinite}
-        @keyframes crtFlicker{0%{opacity:0.8}50%{opacity:1}100%{opacity:0.8}}
-        .bsod-content .glitch{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.02);pointer-events:none;animation:glitch 0.3s ease infinite}
-        @keyframes glitch{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}100%{transform:translateX(0)}}
-        .bsod-content .title{font-size:38px;font-weight:bold;text-align:center;margin-bottom:15px;letter-spacing:4px;text-transform:uppercase;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.2),0 0 60px rgba(0,100,255,0.4);background:rgba(255,255,255,0.05);padding:10px 0;border-bottom:2px solid #4466aa;animation:titlePulse 2s ease-in-out infinite}
-        @keyframes titlePulse{0%,100%{text-shadow:0 0 30px rgba(255,255,255,0.2)}50%{text-shadow:0 0 60px rgba(255,255,255,0.4)}}
-        .bsod-content .err{font-size:17px;color:#aaccff;margin:4px 0;letter-spacing:0.3px;line-height:1.6;animation:errFlicker 0.5s ease infinite}
-        @keyframes errFlicker{0%,100%{opacity:1}50%{opacity:0.7}}
+        .bsod-content{max-width:1000px;width:100%;text-align:left;background:#0000aa;padding:20px 30px;position:relative;overflow:hidden;border:none;box-shadow:none}
+        .bsod-content::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 3px);pointer-events:none;animation:scan .08s linear infinite}
+        @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(3px)}}
+        .bsod-content .crt{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,255,255,0.03) 0px,rgba(0,255,255,0.03) 1px,transparent 1px,transparent 2px);pointer-events:none;animation:crtFlicker 0.05s linear infinite}
+        @keyframes crtFlicker{0%{opacity:0.9}50%{opacity:1}100%{opacity:0.9}}
+        .bsod-content .glitch{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.03);pointer-events:none;animation:glitch 0.15s ease infinite}
+        @keyframes glitch{0%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}
+        .bsod-content .glitch2{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,255,0.05);pointer-events:none;animation:glitch2 0.2s ease infinite}
+        @keyframes glitch2{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+        .bsod-content .title{font-size:38px;font-weight:bold;text-align:center;margin-bottom:15px;letter-spacing:4px;text-transform:uppercase;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);padding:10px 0;border-bottom:2px solid #4466aa;animation:titlePulse 1.5s ease-in-out infinite}
+        @keyframes titlePulse{0%,100%{text-shadow:0 0 20px rgba(255,255,255,0.2)}50%{text-shadow:0 0 60px rgba(255,255,255,0.5)}}
+        .bsod-content .err{font-size:17px;color:#aaccff;margin:4px 0;letter-spacing:0.3px;line-height:1.6;animation:errFlicker 0.4s ease infinite}
+        @keyframes errFlicker{0%,100%{opacity:1}50%{opacity:0.6}}
         .bsod-content .err .hl{background:#fff;color:#0000aa;padding:0 6px;font-weight:bold}
         .bsod-content .err .blink{animation:blinker .7s step-end infinite;color:#fff}
         @keyframes blinker{0%,100%{opacity:1}50%{opacity:0}}
         .bsod-content .dump-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;font-size:15px;color:#88aaff;margin:10px 0;padding:10px 0;border-top:1px dashed #4466aa;border-bottom:1px dashed #4466aa}
         .bsod-content .dump-grid .label{color:#aaccff}
         .bsod-content .dump-grid .value{color:#fff;font-weight:bold}
-        .bsod-content .bar-wrap{background:#001155;border:2px solid #88aaff;height:24px;width:100%;margin:12px 0 6px 0;padding:2px;box-shadow:inset 0 0 20px rgba(0,0,50,0.8);animation:barWrapPulse 1s ease-in-out infinite}
-        @keyframes barWrapPulse{0%,100%{border-color:#88aaff}50%{border-color:#4466aa}}
+        .bsod-content .bar-wrap{background:#001155;border:2px solid #88aaff;height:24px;width:100%;margin:12px 0 6px 0;padding:2px;box-shadow:inset 0 0 20px rgba(0,0,50,0.8)}
         .bsod-content .bar{background:#fff;height:100%;width:0%;animation:progress 55s linear forwards;box-shadow:0 0 30px rgba(255,255,255,0.4)}
         @keyframes progress{0%{width:0%}100%{width:100%}}
         .bsod-content .footer{margin-top:20px;font-size:15px;color:#88aaff;text-align:center;border-top:2px solid #4466aa;padding-top:16px;letter-spacing:0.5px;line-height:1.6}
-        .bsod-content .footer .code{color:#fff;background:#0a0a8a;padding:2px 14px;border:2px solid #88aaff;font-weight:bold;font-size:18px;display:inline-block}
+        .bsod-content .footer .code{color:#fff;background:#0000aa;padding:2px 14px;border:2px solid #88aaff;font-weight:bold;font-size:18px;display:inline-block}
         .bsod-content .footer .panic{color:#ff8888;font-size:16px;animation:blinker 1.2s step-end infinite}
-        .bsod-content .memory-dump{font-size:14px;color:#88aaff;margin:6px 0;font-family:'Courier New',monospace;background:rgba(0,0,50,0.3);padding:4px 8px;border-left:3px solid #4466aa;animation:memDumpFlicker 0.8s ease infinite}
-        @keyframes memDumpFlicker{0%,100%{opacity:1}50%{opacity:0.5}}
+        .bsod-content .memory-dump{font-size:14px;color:#88aaff;margin:6px 0;font-family:'Courier New',monospace;background:rgba(0,0,50,0.3);padding:4px 8px;border-left:3px solid #4466aa;animation:memDumpFlicker 0.6s ease infinite}
+        @keyframes memDumpFlicker{0%,100%{opacity:1}50%{opacity:0.4}}
 
-        .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;animation:flicker .3s ease}.linux.active{display:flex}
+        .bsod-content .v-sync{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(0deg,transparent 0%,rgba(0,0,255,0.1) 50%,transparent 100%);pointer-events:none;animation:vSync 0.05s linear infinite}
+        @keyframes vSync{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+
+        .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px}.linux.active{display:flex}
         @keyframes flicker{0%{opacity:0}20%{opacity:1}40%{opacity:0.3}60%{opacity:1}80%{opacity:0.5}100%{opacity:1}}
-        .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:1px solid #0f0;box-shadow:0 0 40px rgba(0,255,0,.1),inset 0 0 30px rgba(0,255,0,0.05);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto;animation:termFlicker 0.7s ease infinite}
-        @keyframes termFlicker{0%,100%{opacity:1}50%{opacity:0.8}}
-        .linux .term .l{margin:2px 0;opacity:.9;animation:lineFlicker 1.2s ease infinite}
-        @keyframes lineFlicker{0%,100%{opacity:0.9}50%{opacity:0.7}}
-        .linux .term .l .hl{color:#0ff}
-        .linux .term .l .err{color:#f44}
+        .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:1px solid #0f0;box-shadow:0 0 40px rgba(0,255,0,.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto;animation:termFlicker 0.5s ease infinite}
+        @keyframes termFlicker{0%,100%{opacity:1}50%{opacity:0.7}}
+        .linux .term .l{margin:2px 0;opacity:.9;animation:lineFlicker 1s ease infinite}
+        @keyframes lineFlicker{0%,100%{opacity:0.9}50%{opacity:0.6}}
 
         .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
         @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:15px}.bsod-content .title{font-size:28px}.bsod-content .err{font-size:14px}.bsod-content .dump-grid{font-size:13px;grid-template-columns:1fr}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
@@ -72,7 +71,7 @@
 <body>
 <div class="container" id="mainContainer">
     <div class="input-area" id="inputArea">
-        <div class="label">Enter Password</div>
+        <div class="label">Dreamer's_House?</div>
         <input type="text" id="bugInput" maxlength="10" autofocus>
     </div>
     <div class="choice-area hidden" id="choiceArea">
@@ -88,7 +87,9 @@
     <div class="bsod-content">
         <div class="crt"></div>
         <div class="glitch"></div>
-        <div class="title">SYSTEM CRASH</div>
+        <div class="glitch2"></div>
+        <div class="v-sync"></div>
+        <div class="title">CRITICAL ERROR</div>
         <div class="err"><span class="hl">***</span> STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
         <div class="err"><span class="hl">***</span> SYSTEM_SERVICE_EXCEPTION</div>
         <div class="err"><span class="hl">***</span> Fault address: <span class="hl">0xFFFFF800`02A4B3C2</span></div>
