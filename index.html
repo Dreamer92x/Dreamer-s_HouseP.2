@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dreamer's_House?</title>
+    <title>CRITICAL ERROR</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
@@ -23,8 +23,9 @@
         .choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}
         .choice-buttons button:hover{background:#fff;color:#000}
 
-        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:999;font-family:'Courier New',monospace;color:#fff;border:6px solid #000;box-shadow:inset 0 0 40px rgba(0,0,50,0.7)}
+        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:999;font-family:'Courier New',monospace;color:#fff;border:6px solid #000;box-shadow:inset 0 0 40px rgba(0,0,50,0.7);transition:opacity 0.3s ease}
         .bsod.active{display:flex}
+        .bsod.dim{opacity:0.15;transition:opacity 0.1s ease}
         .bsod-content{max-width:1000px;width:100%;text-align:left;background:#0000aa;padding:20px 30px;position:relative;overflow:hidden;border:2px solid #000;box-shadow:inset 0 0 20px rgba(0,0,80,0.5)}
         .bsod-content::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 3px);pointer-events:none;animation:scan 0.1s linear infinite}
         @keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(3px)}}
@@ -47,7 +48,11 @@
         .bsod-content .footer .code{color:#fff;background:#0000aa;padding:2px 14px;border:2px solid #88aaff;font-weight:bold;font-size:18px;display:inline-block}
         .bsod-content .footer .panic{color:#ff6666;font-size:16px;font-weight:bold;animation:panicBlink 1s step-end infinite}
         @keyframes panicBlink{0%,100%{opacity:1}50%{opacity:0.2}}
-        .bsod-content .memory-dump{font-size:14px;color:#88aaff;margin:6px 0;font-family:'Courier New',monospace;background:rgba(0,0,50,0.3);padding:4px 8px;border-left:3px solid #4466aa}
+        .bsod-content .memory-dump{font-size:14px;color:#88aaff;margin:6px 0;font-family:'Courier New',monospace;background:rgba(0,0,50,0.3);padding:4px 8px;border-left:3px solid #4466aa;animation:memDumpFlicker 0.3s ease infinite}
+        @keyframes memDumpFlicker{0%,100%{opacity:1}50%{opacity:0.6}}
+
+        .bsod-content .mid-flicker{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);pointer-events:none;animation:midFlicker 0.15s ease infinite}
+        @keyframes midFlicker{0%,100%{background:rgba(0,0,0,0)}25%{background:rgba(0,0,0,0.05)}50%{background:rgba(0,0,0,0)}75%{background:rgba(0,0,0,0.08)}}
 
         .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;border:6px solid #000}.linux.active{display:flex}
         .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:2px solid #0f0;box-shadow:0 0 30px rgba(0,255,0,0.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto}
@@ -61,7 +66,7 @@
 <body>
 <div class="container" id="mainContainer">
     <div class="input-area" id="inputArea">
-        <div class="label">Dreamer's_House?</div>
+        <div class="label">Enter Password</div>
         <input type="text" id="bugInput" maxlength="10" autofocus>
     </div>
     <div class="choice-area hidden" id="choiceArea">
@@ -77,6 +82,7 @@
     <div class="bsod-content">
         <div class="crt"></div>
         <div class="glitch"></div>
+        <div class="mid-flicker"></div>
         <div class="title">CRITICAL ERROR</div>
         <div class="err"><span class="hl">***</span> STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
         <div class="err"><span class="hl">***</span> SYSTEM_SERVICE_EXCEPTION</div>
@@ -121,6 +127,7 @@
     const dumpProgress = document.getElementById('dumpProgress');
 
     let isCompleted = false;
+    let dimTriggered = false;
 
     function checkBug() {
         const val = bugInput.value.trim().toLowerCase();
@@ -149,6 +156,17 @@
                 linuxTerminal.classList.remove('active');
             }
         }, 1000);
+    }
+
+    function triggerDim() {
+        if (dimTriggered) return;
+        dimTriggered = true;
+        setTimeout(() => {
+            bsod.classList.add('dim');
+            setTimeout(() => {
+                bsod.classList.remove('dim');
+            }, 5000);
+        }, 3000);
     }
 
     function generateLinuxLogs() {
@@ -231,6 +249,7 @@
         if (isCompleted) {
             bsod.classList.add('active');
             choiceArea.classList.add('hidden');
+            triggerDim();
             startTimer();
         }
     });
