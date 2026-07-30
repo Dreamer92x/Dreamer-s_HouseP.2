@@ -22,21 +22,29 @@
         .choice-buttons{display:flex;gap:60px;flex-wrap:wrap;justify-content:center}
         .choice-buttons button{font-family:'Courier New',monospace;font-size:22px;padding:20px 50px;border:2px solid #fff;background:0 0;color:#fff;cursor:pointer;transition:.3s;letter-spacing:3px}
         .choice-buttons button:hover{background:#fff;color:#000}
-        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:flicker .6s ease}.bsod.active{display:flex}
-        @keyframes flicker{0%{opacity:0}15%{opacity:1;transform:scale(1.01)}30%{opacity:.8}45%{opacity:1}100%{opacity:1}}
-        .bsod-content{max-width:850px;width:100%;text-align:left;font-size:18px;line-height:2;background:#0000aa;padding:30px 40px;border:1px solid #fff;box-shadow:inset 0 0 30px rgba(0,0,255,.3)}
-        .bsod-content .title{font-size:32px;font-weight:bold;text-align:center;margin-bottom:25px;letter-spacing:2px;text-transform:uppercase;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
-        .bsod-content .err{font-size:15px;color:#aaccff;margin:8px 0}
-        .bsod-content .err span{background:#fff;color:#0000aa;padding:0 6px}
-        .bsod-content .bar{background:#fff;height:6px;width:100%;margin:20px 0;animation:progress 55s linear forwards}
-        @keyframes progress{0%{width:0}100%{width:100%}}
-        .bsod-content .footer{margin-top:30px;font-size:14px;color:#88aaff;text-align:center;border-top:1px solid #4466aa;padding-top:20px}
+        .bsod{position:fixed;top:0;left:0;width:100%;height:100%;background:#0000aa;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px;z-index:999;font-family:'Courier New',monospace;color:#fff;animation:bsodEnter .8s ease}
+        @keyframes bsodEnter{0%{opacity:0;transform:scale(0.98)}30%{opacity:1;transform:scale(1.02)}60%{transform:scale(0.99)}100%{transform:scale(1)}}
+        .bsod.active{display:flex}
+        .bsod-content{max-width:900px;width:100%;text-align:left;background:#0000aa;padding:25px 35px;border:2px solid #fff;box-shadow:0 0 60px rgba(0,0,255,0.4),inset 0 0 30px rgba(0,0,200,0.5);position:relative}
+        .bsod-content::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.02) 0px,rgba(255,255,255,0.02) 2px,transparent 2px,transparent 4px);pointer-events:none;animation:scanlines 0.1s linear infinite}
+        @keyframes scanlines{0%{transform:translateY(0)}100%{transform:translateY(4px)}}
+        .bsod-content .title{font-size:36px;font-weight:bold;text-align:center;margin-bottom:20px;letter-spacing:3px;text-transform:uppercase;color:#fff;text-shadow:0 0 15px rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);padding:10px 0}
+        .bsod-content .err{font-size:16px;color:#aaccff;margin:6px 0;letter-spacing:0.5px}
+        .bsod-content .err span{background:#fff;color:#0000aa;padding:0 8px;font-weight:bold}
+        .bsod-content .err .blink{animation:blinkText 1s step-end infinite}
+        @keyframes blinkText{0%,100%{opacity:1}50%{opacity:0}}
+        .bsod-content .dump-row{display:flex;justify-content:space-between;font-size:15px;color:#88aaff;margin:4px 0;border-bottom:1px dashed #4466aa;padding:2px 0}
+        .bsod-content .bar-wrap{background:#001155;border:1px solid #88aaff;height:20px;width:100%;margin:15px 0;padding:2px}
+        .bsod-content .bar{background:#ffffff;height:100%;width:0%;animation:progress 55s linear forwards;box-shadow:0 0 20px rgba(255,255,255,0.3)}
+        @keyframes progress{0%{width:0%}100%{width:100%}}
+        .bsod-content .footer{margin-top:25px;font-size:14px;color:#88aaff;text-align:center;border-top:2px solid #4466aa;padding-top:18px;letter-spacing:1px}
+        .bsod-content .footer .code{color:#fff;background:#0000aa;padding:2px 10px;border:1px solid #88aaff;font-weight:bold}
         .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;animation:flicker .3s ease}.linux.active{display:flex}
         .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:1px solid #0f0;box-shadow:0 0 40px rgba(0,255,0,.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto}
         .linux .term .l{margin:2px 0;opacity:.9}
         .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
-        @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{font-size:14px;padding:20px}.bsod-content .title{font-size:24px}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
-        @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{font-size:12px;padding:15px}.bsod-content .title{font-size:18px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
+        @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:20px}.bsod-content .title{font-size:26px}.bsod-content .err{font-size:14px}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
+        @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{padding:15px}.bsod-content .title{font-size:20px}.bsod-content .err{font-size:12px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
     </style>
 </head>
 <body>
@@ -57,14 +65,18 @@
 <div class="bsod" id="bsod">
     <div class="bsod-content">
         <div class="title">СИНИЙ ЭКРАН СМЕРТИ</div>
-        <div class="err">STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
-        <div class="err">SYSTEM_SERVICE_EXCEPTION</div>
-        <div class="err">Адрес: <span>0xFFFFF800`02A4B3C2</span></div>
-        <div style="margin:15px 0;color:#88aaff;">Загрузка драйверов...</div>
-        <div class="bar"></div>
-        <div style="text-align:right;font-size:14px;color:#88aaff;margin-top:-10px;">Сброс дампа: <span id="dumpProgress">0</span>%</div>
-        <div style="margin-top:10px;font-size:15px;color:#88aaff;">Ошибка: IRQL_NOT_LESS_OR_EQUAL | Драйвер: ntoskrnl.exe</div>
-        <div class="footer">Перезагрузите компьютер. Код ошибки: 0x0000007B</div>
+        <div class="err"><span>***</span> STOP: 0x0000007B (0xFFFFF88001234567, 0x0000000000000000, 0x0000000000000000)</div>
+        <div class="err"><span>***</span> SYSTEM_SERVICE_EXCEPTION</div>
+        <div class="err"><span>***</span> Адрес ошибки: <span>0xFFFFF800`02A4B3C2</span></div>
+        <div class="err"><span>***</span> Драйвер: <span>ntoskrnl.exe</span> — IRQL_NOT_LESS_OR_EQUAL</div>
+        <div class="dump-row"><span>Физическая память: 0%</span><span>Страница: 0x00000000</span></div>
+        <div class="dump-row"><span>Дамп памяти: инициализация...</span><span>Кэш: отключён</span></div>
+        <div style="margin:10px 0;color:#88aaff;font-size:15px;">Загрузка критических драйверов... <span class="blink">▌</span></div>
+        <div class="bar-wrap"><div class="bar"></div></div>
+        <div style="text-align:right;font-size:14px;color:#88aaff;margin-top:-5px;">Сброс дампа: <span id="dumpProgress">0</span>%</div>
+        <div class="footer">
+            <span class="code">0x0000007B</span> — Перезагрузите компьютер. Если проблема повторяется,<br>обратитесь к системному администратору.
+        </div>
     </div>
 </div>
 
