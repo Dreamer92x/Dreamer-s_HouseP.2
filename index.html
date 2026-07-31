@@ -33,6 +33,8 @@
         @keyframes crtFlicker{0%{opacity:0.9}50%{opacity:1}100%{opacity:0.9}}
         .bsod-content .glitch{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.02);pointer-events:none;animation:glitch 0.2s ease infinite}
         @keyframes glitch{0%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}100%{transform:translateX(0)}}
+        .bsod-content .mid-flicker{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);pointer-events:none;animation:midFlicker 0.15s ease infinite}
+        @keyframes midFlicker{0%,100%{background:rgba(0,0,0,0)}25%{background:rgba(0,0,0,0.05)}50%{background:rgba(0,0,0,0)}75%{background:rgba(0,0,0,0.08)}}
         .bsod-content .title{font-size:36px;font-weight:bold;text-align:center;margin-bottom:15px;letter-spacing:3px;text-transform:uppercase;color:#fff;text-shadow:0 0 20px rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:10px 0;border-bottom:2px solid #4466aa}
         .bsod-content .err{font-size:17px;color:#aaccff;margin:4px 0;letter-spacing:0.3px;line-height:1.6}
         .bsod-content .err .hl{background:#fff;color:#0000aa;padding:0 6px;font-weight:bold}
@@ -41,8 +43,8 @@
         .bsod-content .dump-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;font-size:15px;color:#88aaff;margin:10px 0;padding:10px 0;border-top:1px dashed #4466aa;border-bottom:1px dashed #4466aa}
         .bsod-content .dump-grid .label{color:#aaccff}
         .bsod-content .dump-grid .value{color:#fff;font-weight:bold}
-        .bsod-content .bar-wrap{background:#001155;border:2px solid #88aaff;height:24px;width:100%;margin:12px 0 6px 0;padding:2px;box-shadow:inset 0 0 20px rgba(0,0,50,0.8)}
-        .bsod-content .bar{background:#fff;height:100%;width:0%;animation:progress 55s linear forwards;box-shadow:0 0 20px rgba(255,255,255,0.3)}
+        .bsod-content .bar-wrap{background:#001155;border:2px solid #ffffff;height:24px;width:100%;margin:12px 0 6px 0;padding:2px;box-shadow:inset 0 0 20px rgba(0,0,50,0.8)}
+        .bsod-content .bar{background:#ffffff;height:100%;width:0%;animation:progress 55s linear forwards;box-shadow:0 0 20px rgba(255,255,255,0.3)}
         @keyframes progress{0%{width:0%}100%{width:100%}}
         .bsod-content .footer{margin-top:20px;font-size:15px;color:#88aaff;text-align:center;border-top:2px solid #4466aa;padding-top:16px;letter-spacing:0.5px;line-height:1.6}
         .bsod-content .footer .code{color:#fff;background:#0000aa;padding:2px 14px;border:2px solid #88aaff;font-weight:bold;font-size:18px;display:inline-block}
@@ -51,12 +53,14 @@
         .bsod-content .memory-dump{font-size:14px;color:#88aaff;margin:6px 0;font-family:'Courier New',monospace;background:rgba(0,0,50,0.3);padding:4px 8px;border-left:3px solid #4466aa;animation:memDumpFlicker 0.3s ease infinite}
         @keyframes memDumpFlicker{0%,100%{opacity:1}50%{opacity:0.6}}
 
-        .bsod-content .mid-flicker{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);pointer-events:none;animation:midFlicker 0.15s ease infinite}
-        @keyframes midFlicker{0%,100%{background:rgba(0,0,0,0)}25%{background:rgba(0,0,0,0.05)}50%{background:rgba(0,0,0,0)}75%{background:rgba(0,0,0,0.08)}}
-
-        .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;border:6px solid #000}.linux.active{display:flex}
-        .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:2px solid #0f0;box-shadow:0 0 30px rgba(0,255,0,0.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto}
+        .linux{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999;font-family:'Courier New',monospace;color:#0f0;padding:30px;border:6px solid #000;transition:opacity 0.3s ease}
+        .linux.active{display:flex}
+        .linux.dim{opacity:0.15;transition:opacity 0.1s ease}
+        .linux .term{max-width:900px;width:100%;background:#000;padding:25px 30px;border:2px solid #0f0;box-shadow:0 0 30px rgba(0,255,0,0.1);text-align:left;font-size:16px;line-height:1.8;color:#0f0;max-height:80vh;overflow-y:auto;position:relative}
         .linux .term .l{margin:2px 0;opacity:.9}
+        .linux .term .mid-flicker{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0);pointer-events:none;animation:midFlicker 0.15s ease infinite}
+        .linux .term .crt{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,255,0,0.03) 0px,rgba(0,255,0,0.03) 1px,transparent 1px,transparent 2px);pointer-events:none;animation:crtFlicker 0.05s linear infinite}
+        .linux .term .glitch{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,255,0,0.02);pointer-events:none;animation:glitch 0.2s ease infinite}
 
         .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
         @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:15px}.bsod-content .title{font-size:28px}.bsod-content .err{font-size:14px}.bsod-content .dump-grid{font-size:13px;grid-template-columns:1fr}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
@@ -108,7 +112,11 @@
 </div>
 
 <div class="linux" id="linuxTerminal">
-    <div class="term" id="terminalContent"></div>
+    <div class="term" id="terminalContent">
+        <div class="crt"></div>
+        <div class="glitch"></div>
+        <div class="mid-flicker"></div>
+    </div>
 </div>
 
 <div class="final" id="finalMessage">
@@ -158,15 +166,34 @@
         }, 1000);
     }
 
-    function triggerDim() {
+    function triggerDim(element) {
         if (dimTriggered) return;
         dimTriggered = true;
+        
+        // Первое затемнение: на 7-й секунде, длится 5 сек
         setTimeout(() => {
-            bsod.classList.add('dim');
+            element.classList.add('dim');
             setTimeout(() => {
-                bsod.classList.remove('dim');
+                element.classList.remove('dim');
             }, 5000);
-        }, 3000);
+        }, 7000);
+        
+        // Второе затемнение: на 27-й секунде, длится 5 сек
+        setTimeout(() => {
+            element.classList.add('dim');
+            setTimeout(() => {
+                element.classList.remove('dim');
+            }, 5000);
+        }, 27000);
+    }
+
+    function triggerLinuxDim() {
+        setTimeout(() => {
+            linuxTerminal.classList.add('dim');
+            setTimeout(() => {
+                linuxTerminal.classList.remove('dim');
+            }, 7000);
+        }, 7000);
     }
 
     function generateLinuxLogs() {
@@ -249,7 +276,7 @@
         if (isCompleted) {
             bsod.classList.add('active');
             choiceArea.classList.add('hidden');
-            triggerDim();
+            triggerDim(bsod);
             startTimer();
         }
     });
@@ -259,6 +286,7 @@
             linuxTerminal.classList.add('active');
             choiceArea.classList.add('hidden');
             generateLinuxLogs();
+            triggerLinuxDim();
             startTimer();
         }
     });
