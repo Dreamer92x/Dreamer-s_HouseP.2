@@ -66,10 +66,10 @@
         @keyframes fade{0%{opacity:0}100%{opacity:1}}
         .final.active{display:flex}
         .final .caesar-text{font-size:28px;letter-spacing:2px;text-shadow:0 0 40px rgba(255,255,255,.5);max-width:800px;line-height:1.6;font-weight:300}
-        .final .caesar-portrait{font-family:'Courier New',monospace;font-size:14px;color:#88aaff;white-space:pre;line-height:1.2;margin-top:10px;text-shadow:0 0 10px rgba(136,170,255,0.3)}
         .final .note{font-size:18px;opacity:0.6;margin-top:10px;letter-spacing:2px}
-        @media(max-width:700px){.final .caesar-text{font-size:20px}.final .caesar-portrait{font-size:10px}.final .note{font-size:14px}}
-        @media(max-width:480px){.final .caesar-text{font-size:16px}.final .caesar-portrait{font-size:8px}.final .note{font-size:12px}}
+        .final img{max-width:300px;width:100%;border:3px solid #88aaff;border-radius:8px;margin-top:10px;box-shadow:0 0 30px rgba(136,170,255,0.3)}
+        @media(max-width:700px){.final .caesar-text{font-size:20px}.final .note{font-size:14px}.final img{max-width:200px}}
+        @media(max-width:480px){.final .caesar-text{font-size:16px}.final .note{font-size:12px}.final img{max-width:150px}}
 
         @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:15px}.bsod-content .title{font-size:28px}.bsod-content .err{font-size:14px}.bsod-content .dump-grid{font-size:13px;grid-template-columns:1fr}.linux .term{font-size:13px;padding:15px}}
         @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{padding:12px}.bsod-content .title{font-size:22px}.bsod-content .err{font-size:12px}.bsod-content .dump-grid{font-size:11px}.linux .term{font-size:11px;padding:10px}}
@@ -128,23 +128,8 @@
 </div>
 
 <div class="final" id="finalMessage">
-    <div class="caesar-text">Pljbqfjbp F'j promofpba vlr'sb jxab fq qefp cxo. Jxvyb vlr zlria qxhb x zilpbo illh xq qeb boolop?</div>
-    <div class="caesar-portrait">
-        ,.-.  _,.--.,-.
-       / ,-'`--'--' / |
-       \,'       .--. /
-       /      .-'`-. \
-      /      / .-. `\ \
-    .'__    / /._.' \ \`.
-   /`--.`'-/ /       \ \ \
-   |    |  / /         \ \ \ 
-   |    | / /           \ \ \ 
-   |    |/ /             \ \_\
-   |    |/ /               \_/
-    \   |/ /                  
-     `--/ /                   
-       /_.'                   
-    </div>
+    <div class="caesar-text" id="finalText">Pljbqfjbp F'j promofpba vlr'sb jxab fq qefp cxo. Jxvyb vlr zlria qxhb x zilpbo illh xq qeb boolop?</div>
+    <img id="caesarImage" src="caesar.jpg" alt="Julius Caesar">
     <div class="note">— Caesar Augustus</div>
 </div>
 
@@ -156,7 +141,9 @@
     const bsod = document.getElementById('bsod');
     const linuxTerminal = document.getElementById('linuxTerminal');
     const finalMessage = document.getElementById('finalMessage');
+    const finalText = document.getElementById('finalText');
     const dumpProgress = document.getElementById('dumpProgress');
+    const errorCodeValue = document.getElementById('errorCodeValue');
 
     let isCompleted = false;
     let dimTriggered = false;
@@ -168,13 +155,15 @@
             document.body.classList.add('dark');
             inputArea.classList.add('hidden');
             
-            if (val === 'bug') {
-                choiceArea.classList.remove('hidden');
-            } else {
-                // 20xx — сразу показываем финал
+            if (val === '20xx') {
+                finalText.textContent = 'Пройден 2 этап';
                 finalMessage.classList.add('active');
                 mainContainer.classList.add('fade-out');
                 return;
+            }
+            
+            if (val === 'bug') {
+                choiceArea.classList.remove('hidden');
             }
             bugInput.blur();
         }
@@ -236,7 +225,7 @@
             '[    0.007890] Initializing cgroup subsys cpuset, cpu, cpuacct',
             '[    0.009012] CPU: Physical Processor ID: 0, Processor Core ID: 0',
             '[    0.010123] memory: 0x0000000000000000 - 0x000000007FFFFFFF (usable)',
-            '[    0.011234] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1 (20xx̱)',
+            '[    0.011234] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1 (20xx)',
             '[    0.012345] ftrace: allocating 45678 entries in 178 pages',
             '[    0.013456] rcu: Hierarchical RCU implementation. Restricting CPUs from NR_CPUS=512 to nr_cpu_ids=8',
             '[    0.014567] NR_IRQS: 1664, nr_irqs: 1024, preallocated irqs: 16',
@@ -304,8 +293,7 @@
         if (isCompleted) {
             bsod.classList.add('active');
             choiceArea.classList.add('hidden');
-            // Заменяем значение Error code на 20xx̱
-            document.getElementById('errorCodeValue').innerHTML = '20xx̱';
+            errorCodeValue.textContent = '20xx';
             triggerDim(bsod);
             startTimer();
         }
