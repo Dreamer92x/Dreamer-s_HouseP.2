@@ -113,7 +113,7 @@
         </div>
         <div class="footer">
             <div class="panic">⚠ SYSTEM HALTED ⚠</div>
-            <span class="code">0x0000007B</span> — Reboot your computer. If the problem persists,<br>
+            <span class="code" id="footerCode">0x0000007B</span> — Reboot your computer. If the problem persists,<br>
             contact your system administrator. <span class="blink">▌</span>
         </div>
     </div>
@@ -144,6 +144,7 @@
     const finalText = document.getElementById('finalText');
     const dumpProgress = document.getElementById('dumpProgress');
     const errorCodeValue = document.getElementById('errorCodeValue');
+    const footerCode = document.getElementById('footerCode');
 
     let isCompleted = false;
     let dimTriggered = false;
@@ -293,7 +294,9 @@
         if (isCompleted) {
             bsod.classList.add('active');
             choiceArea.classList.add('hidden');
+            // Заменяем 0x0000007B на 20xx
             errorCodeValue.textContent = '20xx';
+            footerCode.textContent = '20xx';
             triggerDim(bsod);
             startTimer();
         }
