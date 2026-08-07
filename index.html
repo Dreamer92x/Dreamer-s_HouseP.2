@@ -62,9 +62,17 @@
         .linux .term .crt{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,255,0,0.03) 0px,rgba(0,255,0,0.03) 1px,transparent 1px,transparent 2px);pointer-events:none;animation:crtFlicker 0.05s linear infinite}
         .linux .term .glitch{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,255,0,0.02);pointer-events:none;animation:glitch 0.2s ease infinite}
 
-        .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:30px;animation:fade 1s ease}@keyframes fade{0%{opacity:0}100%{opacity:1}}.final.active{display:flex}.final h1{font-size:42px;letter-spacing:6px;text-shadow:0 0 40px rgba(255,255,255,.5)}.final p{font-size:24px;max-width:600px;line-height:1.8;opacity:.8;letter-spacing:2px}
-        @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:15px}.bsod-content .title{font-size:28px}.bsod-content .err{font-size:14px}.bsod-content .dump-grid{font-size:13px;grid-template-columns:1fr}.linux .term{font-size:13px;padding:15px}.final h1{font-size:30px}.final p{font-size:18px}}
-        @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{padding:12px}.bsod-content .title{font-size:22px}.bsod-content .err{font-size:12px}.bsod-content .dump-grid{font-size:11px}.linux .term{font-size:11px;padding:10px}.final h1{font-size:24px}.final p{font-size:16px}}
+        .final{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:1000;font-family:'Courier New',monospace;color:#fff;text-align:center;padding:20px;flex-direction:column;gap:20px;animation:fade 1s ease}
+        @keyframes fade{0%{opacity:0}100%{opacity:1}}
+        .final.active{display:flex}
+        .final .caesar-text{font-size:28px;letter-spacing:2px;text-shadow:0 0 40px rgba(255,255,255,.5);max-width:800px;line-height:1.6;font-weight:300}
+        .final .caesar-portrait{font-family:'Courier New',monospace;font-size:14px;color:#88aaff;white-space:pre;line-height:1.2;margin-top:10px;text-shadow:0 0 10px rgba(136,170,255,0.3)}
+        .final .note{font-size:18px;opacity:0.6;margin-top:10px;letter-spacing:2px}
+        @media(max-width:700px){.final .caesar-text{font-size:20px}.final .caesar-portrait{font-size:10px}.final .note{font-size:14px}}
+        @media(max-width:480px){.final .caesar-text{font-size:16px}.final .caesar-portrait{font-size:8px}.final .note{font-size:12px}}
+
+        @media(max-width:700px){.input-area .label{font-size:18px}.input-area input{font-size:28px;padding:15px}.choice-buttons button{font-size:18px;padding:15px 30px}.bsod-content{padding:15px}.bsod-content .title{font-size:28px}.bsod-content .err{font-size:14px}.bsod-content .dump-grid{font-size:13px;grid-template-columns:1fr}.linux .term{font-size:13px;padding:15px}}
+        @media(max-width:480px){.input-area .label{font-size:14px}.input-area input{font-size:20px;padding:12px}.choice-buttons{gap:20px}.choice-buttons button{font-size:16px;padding:12px 20px}.bsod-content{padding:12px}.bsod-content .title{font-size:22px}.bsod-content .err{font-size:12px}.bsod-content .dump-grid{font-size:11px}.linux .term{font-size:11px;padding:10px}}
     </style>
 </head>
 <body>
@@ -100,7 +108,7 @@
             <span><span class="label">IRQL:</span> <span class="value">0x0000000A</span></span>
             <span><span class="label">Process:</span> <span class="value">System (PID: 4)</span></span>
             <span><span class="label">Driver:</span> <span class="value">ntfs.sys</span></span>
-            <span><span class="label">Error code:</span> <span class="value">0x0000007B</span></span>
+            <span><span class="label">Error code:</span> <span class="value" id="errorCodeValue">0x0000007B</span></span>
             <span><span class="label">Status:</span> <span class="value">CRITICAL ERROR</span></span>
         </div>
         <div class="footer">
@@ -120,8 +128,24 @@
 </div>
 
 <div class="final" id="finalMessage">
-    <h1>STAGE 2 COMPLETED</h1>
-    <p>Any questions?</p>
+    <div class="caesar-text">Pljbqfjbp F'j promofpba vlr'sb jxab fq qefp cxo. Jxvyb vlr zlria qxhb x zilpbo illh xq qeb boolop?</div>
+    <div class="caesar-portrait">
+        ,.-.  _,.--.,-.
+       / ,-'`--'--' / |
+       \,'       .--. /
+       /      .-'`-. \
+      /      / .-. `\ \
+    .'__    / /._.' \ \`.
+   /`--.`'-/ /       \ \ \
+   |    |  / /         \ \ \ 
+   |    | / /           \ \ \ 
+   |    |/ /             \ \_\
+   |    |/ /               \_/
+    \   |/ /                  
+     `--/ /                   
+       /_.'                   
+    </div>
+    <div class="note">— Caesar Augustus</div>
 </div>
 
 <script>
@@ -139,11 +163,19 @@
 
     function checkBug() {
         const val = bugInput.value.trim().toLowerCase();
-        if (val === 'bug' && !isCompleted) {
+        if ((val === 'bug' || val === '20xx') && !isCompleted) {
             isCompleted = true;
             document.body.classList.add('dark');
             inputArea.classList.add('hidden');
-            choiceArea.classList.remove('hidden');
+            
+            if (val === 'bug') {
+                choiceArea.classList.remove('hidden');
+            } else {
+                // 20xx — сразу показываем финал
+                finalMessage.classList.add('active');
+                mainContainer.classList.add('fade-out');
+                return;
+            }
             bugInput.blur();
         }
     }
@@ -169,16 +201,12 @@
     function triggerDim(element) {
         if (dimTriggered) return;
         dimTriggered = true;
-        
-        // Первое затемнение: на 7-й секунде, длится 5 сек
         setTimeout(() => {
             element.classList.add('dim');
             setTimeout(() => {
                 element.classList.remove('dim');
             }, 5000);
         }, 7000);
-        
-        // Второе затемнение: на 27-й секунде, длится 5 сек
         setTimeout(() => {
             element.classList.add('dim');
             setTimeout(() => {
@@ -208,7 +236,7 @@
             '[    0.007890] Initializing cgroup subsys cpuset, cpu, cpuacct',
             '[    0.009012] CPU: Physical Processor ID: 0, Processor Core ID: 0',
             '[    0.010123] memory: 0x0000000000000000 - 0x000000007FFFFFFF (usable)',
-            '[    0.011234] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1',
+            '[    0.011234] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1 (20xx̱)',
             '[    0.012345] ftrace: allocating 45678 entries in 178 pages',
             '[    0.013456] rcu: Hierarchical RCU implementation. Restricting CPUs from NR_CPUS=512 to nr_cpu_ids=8',
             '[    0.014567] NR_IRQS: 1664, nr_irqs: 1024, preallocated irqs: 16',
@@ -276,6 +304,8 @@
         if (isCompleted) {
             bsod.classList.add('active');
             choiceArea.classList.add('hidden');
+            // Заменяем значение Error code на 20xx̱
+            document.getElementById('errorCodeValue').innerHTML = '20xx̱';
             triggerDim(bsod);
             startTimer();
         }
